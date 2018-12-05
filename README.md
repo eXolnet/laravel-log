@@ -1,4 +1,4 @@
-# laravel-log
+# Laravel Log
 
 [![Latest Stable Version](https://poser.pugx.org/eXolnet/laravel-log/v/stable?format=flat-square)](https://packagist.org/packages/eXolnet/laravel-log)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
