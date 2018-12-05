@@ -1,0 +1,55 @@
+{
+    "name": "exolnet/laravel-log",
+    "description": "This package extends Laravel’s log package to configure a Monolog driver",
+    "keywords": [
+        "exolnet",
+        "laravel",
+        "laravel-log"
+    ],
+    "homepage": "https://github.com/eXolnet/laravel-log",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandre D'Eschabeault",
+            "homepage": "https://www.exolnet.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "graylog2/gelf-php": "^1.5",
+        "illuminate/log": "5.5.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^6.0",
+        "orchestra/testbench" : "^3.5",
+        "squizlabs/php_codesniffer": "^3.3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Exolnet\\Log\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Exolnet\\Log\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "lint": "vendor/bin/phpcs -p --standard=PSR2 config src tests",
+        "lint-fix": "vendor/bin/phpcbf -p --standard=PSR2 config src tests",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Exolnet\\Log\\LogServiceProvider"
+            ]
+        }
+    }
+}
