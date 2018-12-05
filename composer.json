@@ -10,6 +10,10 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Tom Rochette",
+            "email": "trochette@exolnet.com"
+        },
+        {
             "name": "Alexandre D'Eschabeault",
             "homepage": "https://www.exolnet.com",
             "role": "Developer"
