@@ -74,6 +74,7 @@ class LogExceptionsHandlerTest extends UnitTest
     {
         $this->config->shouldReceive('get')->with('log.host')->andReturn('localhost');
         $this->config->shouldReceive('get')->with('log.port')->andReturn(12201);
+        $this->config->shouldReceive('get')->with('log.level')->andReturn('debug');
 
         $this->log->shouldReceive('getMonolog')->andReturn($this->monolog);
 

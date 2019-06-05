@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Log;
+<?php
+
+namespace Exolnet\Log;
 
 use Exolnet\Log\Processor\LaravelProcessor;
 use Gelf\Publisher;
@@ -6,6 +8,7 @@ use Gelf\Transport\UdpTransport;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Logging\Log;
 use Illuminate\Log\Writer as LaravelLogWriter;
+use InvalidArgumentException;
 use Monolog\Handler\GelfHandler;
 use Monolog\Logger;
 use Monolog\Processor\IntrospectionProcessor;
@@ -29,6 +32,24 @@ class LogExceptionsHandler
      * @var \Illuminate\Contracts\Config\Repository
      */
     protected $config;
+
+    /**
+     * The Log levels.
+     *
+     * @var array
+     *
+     * @see \Illuminate\Log\Writer::$levels
+     */
+    protected $levels = [
+        'debug'     => Logger::DEBUG,
+        'info'      => Logger::INFO,
+        'notice'    => Logger::NOTICE,
+        'warning'   => Logger::WARNING,
+        'error'     => Logger::ERROR,
+        'critical'  => Logger::CRITICAL,
+        'alert'     => Logger::ALERT,
+        'emergency' => Logger::EMERGENCY,
+    ];
 
     /**
      * @param \Illuminate\Contracts\Logging\Log $log
@@ -86,6 +107,14 @@ class LogExceptionsHandler
     }
 
     /**
+     * @return string
+     */
+    public function getMonologLevel()
+    {
+        return $this->config->get('log.level');
+    }
+
+    /**
      * @return bool
      */
     public function isConfigured()
@@ -101,6 +130,25 @@ class LogExceptionsHandler
         $transport = new UdpTransport($this->getMonologHost(), $this->getMonologPort());
         $publisher = new Publisher($transport);
 
-        return new GelfHandler($publisher, Logger::ERROR);
+        return new GelfHandler($publisher, $this->parseLevel($this->getMonologLevel()));
+    }
+
+    /**
+     * Parse the string level into a Monolog constant.
+     *
+     * @param  string  $level
+     * @return int
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @see \Illuminate\Log\Writer::parseLevel()
+     */
+    protected function parseLevel($level)
+    {
+        if (isset($this->levels[$level])) {
+            return $this->levels[$level];
+        }
+
+        throw new InvalidArgumentException('Invalid log level.');
     }
 }
