@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Log;
+<?php
+
+namespace Exolnet\Log;
 
 use Exolnet\Log\Processor\LaravelProcessor;
 use Gelf\Publisher;

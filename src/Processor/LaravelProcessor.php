@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Log\Processor;
+<?php
+
+namespace Exolnet\Log\Processor;
 
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Foundation\Application;
