@@ -31,6 +31,7 @@ class LaravelProcessor
     {
         $record['extra']['app'] = $this->config->get('log.app');
         $record['extra']['env'] = $this->app->environment();
+        $record['extra']['level_name'] = $record['level_name'];
 
         return $record;
     }
